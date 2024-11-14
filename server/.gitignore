@@ -1,0 +1,72 @@
+.env
+.env.local
+
+# Python
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.env
+*.env.local
+
+# Virtual environments
+env/
+venv/
+.venv/
+
+# macOS
+.DS_Store
+
+# Logs
+*.log
+
+# FastAPI
+instance/
+*.sqlite3
+*.db
+
+# Test outputs
+.coverage
+htmlcov/
+.tox/
+.nox/
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+
+# Pytest
+.pytest_cache/
+.cache/
+
+# MyPy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# VS Code
+.vscode/
+
+# PyCharm
+.idea/
+
+# Jupyter Notebooks
+.ipynb_checkpoints
+
+# Docker
+docker-compose.override.yml
+docker-compose.local.yml
+.dockerignore
+
+# Build
+build/
+dist/
+*.egg-info/
+
+# Pip
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Other
+*.swp
+*~
