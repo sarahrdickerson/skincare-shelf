@@ -7,14 +7,14 @@ import React from 'react'
 
 const SignupOptionsPage = () => {
   return (
-    <div className='grid grid-cols-2 min-h-screen'>
-        <div className="flex flex-col items-center p-4 space-y-4 px-8">
+    <div className='grid grid-cols-1 md:grid-cols-2 min-h-screen'>
+        <div className="flex flex-col items-center p-4 space-y-4 px-8 pt-12">
             {/* Content for the first column */}
             <div className='flex flex-col space-y-2 text-center'>
                 <h2 className="text-2xl font-bold px-4">Ready to Transform Your Skincare Routine?</h2>
                 <p>Sign up and discover what truly works for your skin</p>
             </div>
-            <div className='flex flex-col space-y-4 flex-grow w-full lg:max-w-lg'>
+            <div className='flex flex-col space-y-6 pt-4 flex-grow w-full lg:max-w-lg'>
                 <Button variant='outline'
                     className='flex flex-row'
                 >
@@ -28,7 +28,7 @@ const SignupOptionsPage = () => {
                 <SignupForm />
             </div>
         </div>
-        <div className="bg-secondary p-4">
+        <div className="bg-secondary p-4 hidden md:block">
             
         </div>
     </div>
