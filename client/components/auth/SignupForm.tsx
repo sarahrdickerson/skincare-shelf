@@ -48,16 +48,16 @@ const SignupForm = () => {
 
   return (
     <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-4 px-8'>
-            <div className='flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0'>
+        <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-4'>
+            <div className='flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0 flex-1'>
                 <FormField
                     control={form.control}
                     name="firstName"
                     render={({ field }) => (
-                        <FormItem>
+                        <FormItem className='flex-1'>
                             <FormLabel htmlFor="firstName">First Name</FormLabel>
                             <FormControl>
-                                <Input {...field} id="firstName" />
+                                <Input {...field} id="firstName"/>
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -67,10 +67,10 @@ const SignupForm = () => {
                     control={form.control}
                     name="lastName"
                     render={({ field }) => (
-                        <FormItem>
+                        <FormItem className='flex-1'>
                             <FormLabel htmlFor="lastName">Last Name</FormLabel>
                             <FormControl>
-                                <Input {...field} id="lastName" />
+                                <Input {...field} id="lastName"/>
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -129,7 +129,7 @@ const SignupForm = () => {
                     </FormItem>
                 )}
             />
-            <Button type="submit" className='w-full'>Sign Up</Button>
+            <Button type="submit" className='w-full font-semibold' variant='secondary'>Sign Up</Button>
         </form>
     </Form>
   )
