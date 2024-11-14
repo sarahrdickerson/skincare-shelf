@@ -14,7 +14,7 @@ body {
     --card-foreground: 240 10% 3.9%;
     --popover: 40 7% 96%;
     --popover-foreground: 240 10% 3.9%;
-    --primary: 139 15.4% 72.2%; /* Soft Sage Green */
+    --primary: 139 15% 68%; /* Updated Soft Sage Green */
     --primary-foreground: 142.1 8.1% 10%; /* Deep Green Text */
     --secondary: 145 14.3% 34.5%; /* Deep Olive */
     --secondary-foreground: 142.1 8.1% 92%; /* Light Text */
@@ -24,9 +24,9 @@ body {
     --accent-foreground: 0 0% 98%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
-    --border: 142.9 8% 80%;
-    --input: 142.9 8% 80%;
-    --ring: 139 15.4% 72.2%;
+    --border: 145 14.3% 34.5%; /* Updated to Deep Olive */
+    --input: 145 14.3% 34.5%; /* Updated to Deep Olive */
+    --ring: 139 15% 68%; /* Updated ring color */
     --radius: 0.5rem;
   }
 
@@ -37,7 +37,7 @@ body {
     --card-foreground: 0 0% 95%;
     --popover: 0 0% 14%;
     --popover-foreground: 0 0% 95%;
-    --primary: 139 15.4% 50%; /* Slightly darker Soft Sage Green for dark mode */
+    --primary: 139 15% 50%; /* Slightly darker Soft Sage Green for dark mode */
     --primary-foreground: 0 0% 98%;
     --secondary: 145 14.3% 34.5%; /* Deep Olive */
     --secondary-foreground: 0 0% 95%;
@@ -49,13 +49,16 @@ body {
     --destructive-foreground: 0 85.7% 97%;
     --border: 0 0% 25%;
     --input: 0 0% 25%;
-    --ring: 139 15.4% 60%;
+    --ring: 139 15% 50%;
   }
 }
 
 @layer base {
   * {
     @apply border-border;
+  }
+  input {
+    @apply bg-card text-card-foreground border border-input rounded;
   }
   body {
     @apply bg-background text-foreground;
