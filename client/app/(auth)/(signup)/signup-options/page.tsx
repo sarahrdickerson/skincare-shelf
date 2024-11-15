@@ -3,7 +3,7 @@ import SignupForm from '@/components/auth/SignupForm'
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
-import { GoogleLogo } from '@phosphor-icons/react';
+import { GoogleLogo, Star } from '@phosphor-icons/react';
 import Image from 'next/image';
 import React from 'react'
 
