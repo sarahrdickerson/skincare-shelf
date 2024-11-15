@@ -30,6 +30,15 @@ async def register(request: RegisterRequest):
     try:
         logger.info(f'Received registration request for {request.email}')
 
+        # Check if email is unique
+        logger.info(f"Checking if email {request.email} is unique")
+        email_response = supabase_admin.table("profiles").select("id").eq("email", request.email).execute()
+        is_email_unique = email_response.data is None or len(email_response.data) == 0
+
+        if not is_email_unique:
+            logger.error(f"Email {request.email} is already registered")
+            raise HTTPException(status_code=409, detail="Email already registered")
+        
         # Check if username is unique
         logger.info(f"Checking if username {request.username} is unique")
         unique_response = supabase_admin.table("profiles").select("id").eq("username", request.username).execute()
@@ -84,7 +93,7 @@ async def register(request: RegisterRequest):
             raise HTTPException(status_code=409, detail="Username already exists")
         else:
             logger.error(f'Database error: {e}')
-            raise HTTPException(status_code=500, detail="Database error")
+            raise HTTPException(status_code=500, detail=f'Database error: {str(e)}')
     except HTTPException as e:
         logger.error(f'HTTP error during registration: {e}')
         raise e
