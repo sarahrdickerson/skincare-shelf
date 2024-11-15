@@ -1,6 +1,7 @@
 "use client";
 import SignupForm from '@/components/auth/SignupForm'
 import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { GoogleLogo } from '@phosphor-icons/react';
 import Image from 'next/image';
@@ -20,9 +21,9 @@ const SignupOptionsPage = () => {
                     className='flex flex-row items-center justify-center'
                 >
                     <div className=''>
-                        <Image src='/google-icon.svg' alt='Google Logo' width={16} height={16} className=''/>
+                        <Image src='/google-icon.svg' alt='Google Logo' width={16} height={16} className='' />
                     </div>
-                    <p className=''>Sign up with Google</p>
+                    <p>Sign up with Google</p>
                 </Button>
                 <div className='flex items-center justify-center space-x-4'>
                     <Separator className='flex-1' />
@@ -32,11 +33,18 @@ const SignupOptionsPage = () => {
                 <SignupForm />
             </div>
         </div>
-        <div className="bg-secondary p-4 hidden md:block">
-            
+
+        {/* Right side: Testimonial or other content */}
+        <div className="bg-secondary p-4 md:flex items-center justify-center hidden md:block px-16 lg:px-8">
+            <Card className='flex flex-col items-center p-4 space-y-4 max-w-lg w-full'>
+                <h2 className="text-2xl font-bold">Why Sign Up?</h2>
+                <p>Sign up to receive personalized skincare recommendations and ingredient insights tailored to your skin</p>
+                <p>Join our community and connect with others who share your skincare concerns</p>
+                <p>Track your skincare journey and see how your skin improves over time</p>
+            </Card>
         </div>
     </div>
   )
 }
 
-export default SignupOptionsPage
+export default SignupOptionsPage;
