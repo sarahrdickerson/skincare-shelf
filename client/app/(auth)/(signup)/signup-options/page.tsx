@@ -19,7 +19,7 @@ const SignupOptionsPage = () => {
             </div>
             <div className='flex flex-col space-y-6 pt-4 flex-grow w-full lg:max-w-lg'>
                 <Button variant='outline'
-                    className='flex flex-row items-center justify-center'
+                    className='flex flex-row items-center justify-center rounded-full'
                 >
                     <div className=''>
                         <Image src='/google-icon.svg' alt='Google Logo' width={16} height={16} className='' />
