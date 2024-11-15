@@ -17,6 +17,7 @@ import {
 import { Input } from "@/components/ui/input"
 import AxiosInstance from '@/utils/axiosInstance';
 import { useRouter } from 'next/navigation';
+import axios from "axios";
 
 const loginFormSchema = z.object({
     email: z.string().email({message: "Please enter a valid email"}),
@@ -35,8 +36,36 @@ const LoginForm = () => {
         }
     });
 
-    async function onSubmit(values: z.infer<typeof loginFormSchema>) {
-        
+    async function onSubmit(data: z.infer<typeof loginFormSchema>) {
+        try{
+            const response = await AxiosInstance.post('/api/auth/login', {
+                email: data.email,
+                password: data.password
+            }, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            console.log("Login status:", response.statusText, response.status);
+
+            // Redirect to dashboard on successful login
+            if (response.status === 200) {
+                const token = response.data.access_token;
+
+                // Store the token in localStorage and cookies
+                localStorage.setItem('access_token', token);
+                document.cookie = `access_token=${token}; path=/; max-age=86400`;
+
+                // Redirect to dashboard
+                router.push('/dashboard');
+            }
+        } catch (error) {
+            if (axios.isAxiosError(error) && error.response) {
+                console.error("Login failed:", error.response.data.detail);
+            } else {
+                console.error("Login failed:", error); 
+            }
+        }
     }
 
     return (

@@ -100,3 +100,45 @@ async def register(request: RegisterRequest):
     except Exception as e:
         logger.error(f'Unexpected error during registration: {e}')
         raise HTTPException(status_code=500, detail="Internal server error")
+    
+class LoginRequest(BaseModel):
+    email: str
+    password: str
+
+@router.post("/login", status_code=status.HTTP_200_OK)
+async def login(request: LoginRequest):
+    """
+    Login a user using their email and password.
+
+    Args:
+        request (LoginRequest): The request body containing the user's email and password.   
+    """
+    try:
+        logger.info(f'Received login request for {request.email}')
+
+        # Call supabase login method
+        auth_response = supabase.auth.sign_in_with_password({
+            'email': request.email,
+            'password': request.password
+        })
+
+        logger.info(f"Login successful for {request.email}")
+
+        return {
+            "detail": "Login successful",
+            "access_token": auth_response.session.access_token,
+            "refresh_token": auth_response.session.refresh_token,
+            "user": {
+                "id": auth_response.user.id,
+                "email": auth_response.user.email,
+            }
+        }
+    except AuthApiError as e:
+        logger.error(f"Error logging in user: {str(e)}")
+        raise HTTPException(status_code=e.status, detail=f'Login error: {str(e)}')
+    except HTTPException as e:
+        logger.error(f'HTTP error during login: {e}')
+        raise e
+    except Exception as e:
+        logger.error(f'Unexpected error during login: {e}')
+        raise HTTPException(status_code=500, detail="Internal server error")
