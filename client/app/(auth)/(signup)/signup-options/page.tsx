@@ -5,6 +5,7 @@ import { Card } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { GoogleLogo, Star } from '@phosphor-icons/react';
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react'
 
 const SignupOptionsPage = () => {
@@ -31,6 +32,15 @@ const SignupOptionsPage = () => {
                     <Separator className='flex-1' />
                 </div>
                 <SignupForm />
+                <div className='flex flex-row items-center justify-center'>
+                    <p className='text-sm text-neutral-600'>Already have an account?</p>
+                    <Link href="/login">
+                        <Button variant='link'
+                        >
+                            Sign in
+                        </Button>
+                    </Link>
+                </div>
             </div>
         </div>
 
