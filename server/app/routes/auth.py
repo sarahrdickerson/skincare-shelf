@@ -13,8 +13,8 @@ async def root():
     return {"message": "Auth API"}
 
 class RegisterRequest(BaseModel):
-    firstName: str
-    lastName: str
+    first_name: str
+    last_name: str
     username: str
     email: str
     password: str
@@ -54,7 +54,7 @@ async def register(request: RegisterRequest):
             'password': request.password,
             'options': {
                 'data': {
-                    'display_name': f'{request.firstName} {request.lastName}',
+                    'display_name': f'{request.first_name} {request.last_name}',
                 }
             }
         })
@@ -66,8 +66,8 @@ async def register(request: RegisterRequest):
         logger.info(f"Inserting user {request.email} into profiles table")
         supabase.table('profiles').insert({
             'id': auth_response.user.id,
-            'first_name': request.firstName,
-            'last_name': request.lastName,
+            'first_name': request.first_name,
+            'last_name': request.last_name,
             'username': request.username,
             'email': request.email
         }).execute()

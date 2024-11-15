@@ -15,6 +15,8 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
+import AxiosInstance from '@/utils/axiosInstance';
+import { useRouter } from 'next/navigation';
 
 const SignupFormSchema = z.object({
     firstName: z.string().min(2, {message: "First name must be at least 2 characters"}),
@@ -30,6 +32,8 @@ const SignupFormSchema = z.object({
 });
 
 const SignupForm = () => {
+    const router = useRouter();
+
     const form = useForm<z.infer<typeof SignupFormSchema>>({
         resolver: zodResolver(SignupFormSchema),
         defaultValues: {
@@ -42,8 +46,37 @@ const SignupForm = () => {
         }
     })
 
-    function onSubmit(data: z.infer<typeof SignupFormSchema>) {
-        console.log(data)
+    async function onSubmit(data: z.infer<typeof SignupFormSchema>) {
+        try {
+            console.log("Attempting to register user", data.email);
+            const response = await AxiosInstance.post('/api/auth/register', {
+                first_name: data.firstName,
+                last_name: data.lastName,
+                username: data.username,
+                email: data.email,
+                password: data.password
+            }, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            console.log("Register status:", response.statusText, response.status);
+
+            // Redirect to dashboard on successful login
+            if (response.status === 201) {
+                const token = response.data.access_token;
+
+                // Store the token in localStorage and cookies
+                localStorage.setItem('access_token', token);
+                document.cookie = `access_token=${token}; path=/; max-age=86400`;
+
+                // Redirect to dashboard
+                router.push('/dashboard');
+            }
+        } catch (error) {
+            console.error("Error registering user", error);
+        }
     }
 
   return (
