@@ -2,6 +2,7 @@ import * as React from "react"
 import {
   Sidebar,
   SidebarContent,
+  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
@@ -17,8 +18,14 @@ import {
     Package,
     Search
 } from "lucide-react"
+import { NavUser } from "./nav-user"
 
 const data = {
+    user: {
+        name: "shadcn",
+        email: "m@example.com",
+        avatar: "/avatars/shadcn.jpg",
+      },
     navMain: [
         {
             title: "Home",
@@ -34,13 +41,6 @@ const data = {
         }
     ],
     navGroups: [
-        {
-            title: "Shelves",
-            url: "#",
-            items: [
-                // TODO: add shelves as collections
-            ]
-        },
         {
             title: "Products",
             url: "#",
@@ -58,17 +58,24 @@ const data = {
                     isActive: false
                 }
             ]
+        },
+        {
+            title: "Shelves",
+            url: "#",
+            items: [
+                // TODO: add shelves as collections
+            ]
         }
     ]
 }
 export function AppSidebar({...props}: React.ComponentProps<typeof Sidebar>){
     return (
-        <Sidebar className="px-2" {...props}>
+        <Sidebar {...props}>
             <SidebarHeader>
                 
             </SidebarHeader>
-            <SidebarContent>
-                <SidebarMenu className="p-2">
+            <SidebarContent className="p-2">
+                <SidebarMenu className="px-2">
                     {data.navMain.map((item) => (
                         <SidebarMenuItem key={item.title}>
                             <SidebarMenuButton asChild isActive={item.isActive}>
@@ -94,6 +101,9 @@ export function AppSidebar({...props}: React.ComponentProps<typeof Sidebar>){
                     </SidebarGroup>
                 ))}
             </SidebarContent>
+            <SidebarFooter>
+                <NavUser user={data.user}/>
+            </SidebarFooter>
         </Sidebar>
     )
 }

@@ -18,26 +18,24 @@ body {
     --primary-foreground: 142.1 8.1% 10%; /* Deep Green Text */
     --secondary: 145 14.3% 34.5%; /* Deep Olive */
     --secondary-foreground: 142.1 8.1% 92%; /* Light Text */
-    --muted: 142.9 20% 94.1%; 
-    --muted-foreground: 142.9 8% 35%; 
-    /* --accent: 200 48.8% 62%;  */
-    /* --accent-foreground: 0 0% 98%; */
-    --accent: 220 12% 92%; /* Slightly more noticeable light gray (#E5E7EB) */
-    --accent-foreground: 220 15% 27%; /* Darker Foreground (#374151) */
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
-    --border: 145 14.3% 34.5%; /* Updated to Deep Olive */
-    --input: 145 14.3% 34.5%; /* Updated to Deep Olive */
-    --ring: 139 15% 68%; /* Updated ring color */
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 142.1 76.2% 36.3%;
     --radius: 0.5rem;
-    --sidebar-background: var(--background);
-    --sidebar-foreground: var(--foreground);
-    --sidebar-primary: var(--primary);
-    --sidebar-primary-foreground: var(--primary-foreground);
-    --sidebar-accent: var(--accent);
-    --sidebar-accent-foreground: var(--accent-foreground);
-    --sidebar-border: 220 8% 96%;
-    --sidebar-ring: 220 8% 96%;
+    --sidebar-background: 0 0% 95%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 0, 0%, 90%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
   .dark {
