@@ -6,6 +6,7 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar"
+import UserCard from '@/components/user/user-card'
 
 const DashboardPage = () => {
   return (

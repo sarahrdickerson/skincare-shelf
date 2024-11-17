@@ -32,6 +32,7 @@ import {
 import { useRouter } from "next/navigation"
 import { useUser } from "@/context/UserContext"
 import UserAvatar from "../user/user-avatar"
+import UserCard from "../user/user-card"
 
 export function NavUser() {
   const { isMobile } = useSidebar();
@@ -61,11 +62,7 @@ export function NavUser() {
               size="lg"
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
             >
-              <UserAvatar />
-              <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate font-semibold">{user?.first_name.toLocaleLowerCase()} {user?.last_name.toLocaleLowerCase()}</span>
-                <span className="truncate text-xs">{user?.email}</span>
-              </div>
+              <UserCard/>
               <ChevronsUpDown className="ml-auto size-4" />
             </SidebarMenuButton>
           </DropdownMenuTrigger>
@@ -77,11 +74,7 @@ export function NavUser() {
           >
             <DropdownMenuLabel className="p-0 font-normal">
               <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-                <UserAvatar />
-                <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-semibold">{user?.first_name.toLocaleLowerCase()} {user?.last_name.toLocaleLowerCase()}</span>
-                  <span className="truncate text-xs">{user?.email}</span>
-                </div>
+                <UserCard />
               </div>
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
