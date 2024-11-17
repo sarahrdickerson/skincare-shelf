@@ -29,6 +29,7 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar"
+import { useRouter } from "next/navigation"
 
 export function NavUser({
   user,
@@ -40,6 +41,21 @@ export function NavUser({
   }
 }) {
   const { isMobile } = useSidebar()
+  const router = useRouter()
+
+  const handleLogout = () => {
+    // Clear the access token from localStorage
+    window.localStorage.removeItem('access_token');
+    
+    // Clear the access token from cookies
+    document.cookie = 'access_token=; path=/; max-age=0'; // Deletes the cookie
+    
+    console.log("Logging out...");
+
+    // Redirect to the home page
+    router.push('/login');
+
+  }
 
   return (
     <SidebarMenu>
@@ -82,13 +98,6 @@ export function NavUser({
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
               <DropdownMenuItem>
-                <Sparkles />
-                Upgrade to Pro
-              </DropdownMenuItem>
-            </DropdownMenuGroup>
-            <DropdownMenuSeparator />
-            <DropdownMenuGroup>
-              <DropdownMenuItem>
                 <BadgeCheck />
                 Account
               </DropdownMenuItem>
@@ -102,7 +111,7 @@ export function NavUser({
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
+            <DropdownMenuItem onClick={handleLogout}>
               <LogOut />
               Log out
             </DropdownMenuItem>

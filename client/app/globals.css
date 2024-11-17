@@ -12,7 +12,7 @@ body {
     --foreground: 240 10% 3.9%;
     --card: 40 7% 96%;
     --card-foreground: 240 10% 3.9%;
-    --popover: 40 7% 96%;
+    --popover: 0 0% 98%;
     --popover-foreground: 240 10% 3.9%;
     --primary: 139 15% 68%; /* Updated Soft Sage Green */
     --primary-foreground: 142.1 8.1% 10%; /* Deep Green Text */
