@@ -17,6 +17,7 @@ import {
 import { Input } from "@/components/ui/input"
 import AxiosInstance from '@/utils/axiosInstance';
 import { useRouter } from 'next/navigation';
+import { Icons } from '@/components/icons';
 
 const SignupFormSchema = z.object({
     firstName: z.string().min(2, {message: "First name must be at least 2 characters"}),
@@ -33,6 +34,7 @@ const SignupFormSchema = z.object({
 
 const SignupForm = () => {
     const router = useRouter();
+    const [isLoading, setIsLoading] = React.useState(false);
 
     const form = useForm<z.infer<typeof SignupFormSchema>>({
         resolver: zodResolver(SignupFormSchema),
@@ -48,6 +50,12 @@ const SignupForm = () => {
 
     async function onSubmit(data: z.infer<typeof SignupFormSchema>) {
         try {
+            setIsLoading(true);
+
+            setTimeout(() => {
+                setIsLoading(false);
+            }, 3000);
+
             console.log("Attempting to register user", data.email);
             const response = await AxiosInstance.post('/api/auth/register', {
                 first_name: data.firstName,
@@ -162,7 +170,16 @@ const SignupForm = () => {
                     </FormItem>
                 )}
             />
-            <Button type="submit" className='w-full font-semibold rounded-full' variant='secondary'>Sign Up</Button>
+            <Button 
+                type="submit" 
+                className='w-full font-semibold rounded-full' 
+                variant='secondary'
+                disabled={isLoading}
+            >
+                {isLoading && (
+                    <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+                )} Sign Up
+            </Button>
         </form>
     </Form>
   )

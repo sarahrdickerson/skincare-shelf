@@ -2,7 +2,8 @@
 import { useUser } from '@/context/UserContext';
 import React from 'react'
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
-import UserAvatar from './user-avatar';
+import UserAvatar from '@/components/user/user-avatar';
+import { Skeleton } from '@/components/ui/skeleton';
 
 
 const UserCard = () => {
@@ -11,9 +12,13 @@ const UserCard = () => {
     // If user is loading or doesn't exist yet, show a fallback
     if (loading || !user) {
         return (
-            <Avatar className="h-8 w-8 rounded-lg">
-                <AvatarFallback>?</AvatarFallback>
-            </Avatar>
+            <div className="flex items-center space-x-4">
+                <Skeleton className="h-8 w-8 rounded-full" />
+                <div className="space-y-2">
+                    <Skeleton className="h-4 w-[250px]" />
+                    <Skeleton className="h-2 w-[200px]" />
+                </div>
+            </div>
         );
     }
   return (

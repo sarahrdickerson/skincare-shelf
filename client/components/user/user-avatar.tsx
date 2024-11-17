@@ -2,6 +2,7 @@
 import React from 'react'
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
 import { useUser } from '@/context/UserContext'
+import { Skeleton } from '@/components/ui/skeleton';
 
 const UserAvatar = () => {
     const { user, loading } = useUser();  // Destructure user and loading state
@@ -9,9 +10,7 @@ const UserAvatar = () => {
     // If user is loading or doesn't exist yet, show a fallback
     if (loading || !user) {
         return (
-            <Avatar className="h-8 w-8 rounded-lg">
-                <AvatarFallback>?</AvatarFallback>
-            </Avatar>
+            <Skeleton className="h-8 w-8 rounded-lg" />
         );
     }
 

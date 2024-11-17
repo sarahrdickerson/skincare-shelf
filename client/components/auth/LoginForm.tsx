@@ -18,6 +18,7 @@ import { Input } from "@/components/ui/input"
 import AxiosInstance from '@/utils/axiosInstance';
 import { useRouter } from 'next/navigation';
 import axios from "axios";
+import {Icons} from '@/components/icons';
 
 const loginFormSchema = z.object({
     email: z.string().email({message: "Please enter a valid email"}),
@@ -28,6 +29,7 @@ const loginFormSchema = z.object({
 
 const LoginForm = () => {
     const router = useRouter();
+    const [isLoading, setIsLoading] = React.useState(false);
     const form = useForm<z.infer<typeof loginFormSchema>>({
         resolver: zodResolver(loginFormSchema),
         defaultValues: {
@@ -38,6 +40,12 @@ const LoginForm = () => {
 
     async function onSubmit(data: z.infer<typeof loginFormSchema>) {
         try{
+            setIsLoading(true);
+
+            setTimeout(() => {
+                setIsLoading(false);
+            }, 3000);
+
             const response = await AxiosInstance.post('/api/auth/login', {
                 email: data.email,
                 password: data.password
@@ -100,8 +108,11 @@ const LoginForm = () => {
                 <Button type="submit" 
                     className='w-full rounded-full'
                     variant='secondary'
+                    disabled={isLoading}
                 >
-                    Log in
+                    {isLoading && (
+                        <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+                    )} Login
                 </Button>
             </form>
         </Form>
