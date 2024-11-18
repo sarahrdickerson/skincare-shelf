@@ -10,7 +10,7 @@ interface LayoutProps {
 const AuthenticatedLayout = ({children}: LayoutProps) => {
     return (
         <UserProvider>
-            <main className='flex-1 flex flex-col mt-4'>
+            <main className='flex-1 flex flex-col'>
                 {children}
             </main>
         </UserProvider>

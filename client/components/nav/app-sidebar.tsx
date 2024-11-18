@@ -1,3 +1,4 @@
+"use client";
 import * as React from "react"
 import {
   Sidebar,
@@ -11,6 +12,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarRail,
+  SidebarTrigger,
 } from "@/components/ui/sidebar"
 import {
     Bookmark,
@@ -19,6 +21,8 @@ import {
     Search
 } from "lucide-react"
 import { NavUser } from "./nav-user"
+import { useIsMobile } from "@/hooks/use-mobile"
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 
 const data = {
     user: {
@@ -69,10 +73,16 @@ const data = {
     ]
 }
 export function AppSidebar({...props}: React.ComponentProps<typeof Sidebar>){
+    const isMobile = useIsMobile();
+
     return (
         <Sidebar {...props}>
             <SidebarHeader>
-                
+                {isMobile && (
+                    <div className="flex flex-row w-full justify-end px-2">
+                        <SidebarTrigger/>
+                    </div>
+                )}
             </SidebarHeader>
             <SidebarContent className="p-2">
                 <SidebarMenu className="px-2">
