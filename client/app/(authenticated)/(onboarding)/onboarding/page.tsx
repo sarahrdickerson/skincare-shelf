@@ -3,6 +3,9 @@ import React, {useState} from 'react'
 import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button';
 import { motion, AnimatePresence } from "framer-motion";
+import { set } from 'react-hook-form';
+import { Icons } from '@/components/icons';
+import AxiosInstance from '@/utils/axiosInstance';
 
 const questions = [
     {
@@ -64,7 +67,30 @@ const OnboardingPage = () => {
     }
 
     const postAnswersToBackend = async () => {
-        console.log(answers);
+        try {
+            console.log("Posting answers to the backend", answers);
+            setLoading(true);
+
+            setTimeout(() => {
+                setLoading(false);
+            }, 3000);
+
+            const response = await AxiosInstance.patch('/api/profile/update', {
+                skin_data: answers
+            }, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (response.status === 200) {
+                console.log("Successfully updated user profile");
+                router.push('/dashboard');
+            }
+            
+        } catch (error) {
+            console.error("Failed to post answers to the backend", error);
+        }
     }
 
     return (
@@ -118,8 +144,11 @@ const OnboardingPage = () => {
                         onClick={postAnswersToBackend}
                         variant="secondary"
                         className='rounded-full w-full'
+                        disabled={loading}
                     >
-                        Finish
+                        {loading && (
+                            <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+                        )}Finish
                     </Button>
                 )}
             </div>
