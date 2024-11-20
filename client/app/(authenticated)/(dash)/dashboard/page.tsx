@@ -17,6 +17,7 @@ import {
 import UserCard from '@/components/user/user-card'
 import { SkeletonCard } from '@/components/skeleton/skeleton-card'
 import { Skeleton } from '@/components/ui/skeleton'
+import { SkeletonPage } from '@/components/skeleton/skeleton-page'
 
 const DashboardPage = () => {
   return (
@@ -29,12 +30,7 @@ const DashboardPage = () => {
           <p className='text-md'>Skincare Shelf</p>
         </header>
         <div className="flex flex-1 flex-col gap-4 p-4">
-          <div className="grid auto-rows-min gap-4 md:grid-cols-3">
-            <SkeletonCard />
-            <SkeletonCard />
-            <SkeletonCard />
-          </div>
-          <Skeleton className='min-h-[100vh] flex-1 rounded-xl md:min-h-min'></Skeleton>
+          <SkeletonPage />
         </div>
       </SidebarInset>
     </SidebarProvider>
