@@ -46,7 +46,7 @@ const questions = [
 
 const OnboardingPage = () => {
     const [currentQuestion, setCurrentQuestion] = useState(0);
-    const [answers, setAnswers] = useState({});
+    const [answers, setAnswers] = useState<{ [key: string]: string }>({});
     const [loading, setLoading] = useState(false);
     const [transitioning, setTransitioning] = useState(false);
     const router = useRouter();
@@ -58,13 +58,9 @@ const OnboardingPage = () => {
         });
         console.log("Current question", currentQuestion);
 
-        setTimeout(() => {
-            if ( currentQuestion < questions.length - 1 ) {
-                setCurrentQuestion(currentQuestion + 1);
-            } else {
-                postAnswersToBackend();
-            }
-        }, 300);
+        if ( currentQuestion < questions.length - 1 ) {
+            setCurrentQuestion(currentQuestion + 1);
+        }
     }
 
     const postAnswersToBackend = async () => {
@@ -91,8 +87,9 @@ const OnboardingPage = () => {
                             {questions[currentQuestion]?.options.map((option, index) => (
                                 <Button
                                     key={index}
-                                    className='w-full py-3 px-6'
+                                    className="w-full py-3 px-6"
                                     onClick={() => handleAnswer(option)}
+                                    variant={answers[questions[currentQuestion]?.key] === option ? "secondary" : "default"}
                                 >
                                     {option}
                                 </Button>
@@ -113,6 +110,18 @@ const OnboardingPage = () => {
                             onClick={() => setCurrentQuestion(index)}
                         />
                     ))}
+            </div>
+
+            <div className='w-full'>
+                {currentQuestion === questions.length - 1 && (
+                    <Button
+                        onClick={postAnswersToBackend}
+                        variant="secondary"
+                        className='rounded-full w-full'
+                    >
+                        Finish
+                    </Button>
+                )}
             </div>
         </div>
     )
