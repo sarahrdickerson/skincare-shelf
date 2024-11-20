@@ -80,7 +80,7 @@ const SignupForm = () => {
                 document.cookie = `access_token=${token}; path=/; max-age=86400`;
 
                 // Redirect to dashboard
-                router.push('/dashboard');
+                router.push('/onboarding');
             }
         } catch (error) {
             console.error("Error registering user", error);
