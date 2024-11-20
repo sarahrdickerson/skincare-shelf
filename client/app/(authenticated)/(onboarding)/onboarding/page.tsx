@@ -2,6 +2,8 @@
 import React, {useState} from 'react'
 import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button';
+import { motion, AnimatePresence } from "framer-motion";
+
 const questions = [
     {
       question: "What is your skin type?",
@@ -72,21 +74,32 @@ const OnboardingPage = () => {
     return (
         <div className='flex flex-col items-center p-8 space-y-6 max-w-lg mx-auto'>
             <div className='w-full'>
-                <div className='text-xl mb-4 text-center'>
-                    <p>{questions[currentQuestion]?.question}</p>
-                </div>
+                <AnimatePresence mode="wait">
+                    <motion.div
+                        key={currentQuestion} // Key ensures the animation works when the question changes
+                        initial={{ opacity: 0, x: 50 }} // Initial state: off-screen and transparent
+                        animate={{ opacity: 1, x: 0 }} // Final state: fully visible and in position
+                        exit={{ opacity: 0, x: -50 }} // Exit state: move upwards and fade out
+                        transition={{ duration: 0.5 }} // Transition duration
+                        className="space-y-4"
+                    >
+                        <div className='text-xl mb-4 text-center'>
+                            <p>{questions[currentQuestion]?.question}</p>
+                        </div>
 
-                <div className='space-y-4'>
-                    {questions[currentQuestion]?.options.map((option, index) => (
-                        <Button
-                            key={index}
-                            className='w-full py-3 px-6'
-                            onClick={() => handleAnswer(option)}
-                        >
-                            {option}
-                        </Button>
-                    ))}
-                </div>
+                        <div className='space-y-4'>
+                            {questions[currentQuestion]?.options.map((option, index) => (
+                                <Button
+                                    key={index}
+                                    className='w-full py-3 px-6'
+                                    onClick={() => handleAnswer(option)}
+                                >
+                                    {option}
+                                </Button>
+                            ))}
+                        </div>
+                    </motion.div>
+                </AnimatePresence>
             </div>
 
             <div className='flex space-x-2 mt-6'>
