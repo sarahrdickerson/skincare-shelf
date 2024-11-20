@@ -77,10 +77,10 @@ const OnboardingPage = () => {
                 <AnimatePresence mode="wait">
                     <motion.div
                         key={currentQuestion} // Key ensures the animation works when the question changes
-                        initial={{ opacity: 0, x: 50 }} // Initial state: off-screen and transparent
-                        animate={{ opacity: 1, x: 0 }} // Final state: fully visible and in position
-                        exit={{ opacity: 0, x: -50 }} // Exit state: move upwards and fade out
-                        transition={{ duration: 0.5 }} // Transition duration
+                        initial={{ opacity: 0, x: 50 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: -50 }}
+                        transition={{ duration: 0.5 }} 
                         className="space-y-4"
                     >
                         <div className='text-xl mb-4 text-center'>
